@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "mlog",
+    "password": "mlog1234",
+    "database": "meeting_logger",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "mlog",
+    "password": "mlog1234",
+    "database": "meeting_logger",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "mlog",
+    "password": "mlog1234",
+    "database": "meeting_logger",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
