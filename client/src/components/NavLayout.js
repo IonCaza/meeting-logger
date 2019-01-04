@@ -24,11 +24,13 @@ const styles = theme => ({
 
 class Layout extends Component {
   render() {
-    const { classes } = this.props;
+    const { classes, children } = this.props;
 
     return (
       <WithRoot>
-        <div className={classes.root}>Hello world</div>
+        <div className={classes.root}>
+          <main className={classes.content}>{children}</main>
+        </div>
       </WithRoot>
     );
   }
@@ -36,6 +38,7 @@ class Layout extends Component {
 
 Layout.propTypes = {
   classes: PropTypes.object.isRequired,
+  children: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(Layout);

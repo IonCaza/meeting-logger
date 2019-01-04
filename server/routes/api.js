@@ -53,11 +53,11 @@ router.post('/signin', function(req, res) {
       .catch((error) => res.status(400).send(error));
 });
 
-router.get('/meeting', passport.authenticate('jwt', { session: false}), function(req, res) {
+router.get('/meeting', passport.authenticate('jwt', {session: false}), function(req, res) {
     var token = getToken(req.headers);
     if (token) {
       Meeting
-        .findAll()
+        .findAll({ where: { team_id: req.user.dataValues.id }})
         .then((meetings) => res.status(200).send(meetings))
         .catch((error) => { res.status(400).send(error); });
     } else {
@@ -70,7 +70,7 @@ router.post('/meeting', passport.authenticate('jwt', { session: false}), functio
     if (token) {
         Meeting
             .create({
-                team_id: req.body.team_id,
+                team_id: req.user.dataValues.id,
                 meeting_time: req.body.meeting_time
             })
             .then((meetings) => res.status(201).send(meetings))
