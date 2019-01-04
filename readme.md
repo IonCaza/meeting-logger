@@ -15,3 +15,7 @@ Back-end API is Node/Express/Sequelize. It has 4 working endpoint: sign-up, sign
 ### IoT Device
 
 Arduino Uno Rev 3 does not have enough memory to support Ethernet Client + ArduinoJson library. Currently waiting on more hardware (and rewriting the application to a Teensy3.2). Arduino Ethernet Shield would work fine for this but I'm going to replace it with a WIZ820io + W5500 ethernet module. These will stack perfectly on top of a Teensy. The logic to connect to AWS through Ford Proxy has been written and it works. The logic to make a call to AWS to authenticate (get a JWT token) works… it's just a matter of getting the new hardware and putting it all together (as Arduino's memory is at 80% utilization from just the authentication call.
+
+## Installation
+
+* Read `install.md`
