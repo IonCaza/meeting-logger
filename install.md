@@ -10,6 +10,8 @@
 * Install your favorite node package manager (mine is yarn https://yarnpkg.com/en/)
 * For the backend server
   * Run `yarn install` in /server
+  * Add Sequelize to your machine by running `yarn add global sequelize`
+  * Migrate the database with sequelize by running `sequelize db:migrate` in /server
   * Run `yarn start` in /server to start the server (you shouldn't get any errors at this point)
   * To test the server, use Postman to POST to http://localhost:3000/api/signup with the following `application/json` payload
     * `{ "teamname": "MyTeam", "username": "myuser", "password": "newpassword" }` this should result in a 200 with an explanation of what was inserted into the database
