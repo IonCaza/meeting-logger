@@ -5,15 +5,13 @@
 //include arduinojson at some point
 
 /******* Constants *******/
+String version = "0.2";
+bool serialOn = true; // turns on serial for debugging, although seems like even if not turned on, serial = on lol.
+bool lcdOn = true;
 int Button = 0; // pin for button
 int LCDTime = 250; // the value of delay time for LCD
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED }; // MAC address
 char server[] = "www.google.com";    // name address for Google (using DNS)
-
-// LCD Messages
-char txt1[]="1234567890111213                "; //the string to print on the LCD
-char txt2[]="1234567890111214                "; //the string to print on the LCD
-char txt3[]="1234567890111215                "; //the string to print on the LCD
 
 /******* Variables *******/
 unsigned long beginMicros, endMicros;
@@ -30,24 +28,43 @@ IPAddress myDns(192, 168, 0, 1);
 void setup() {
   pinMode(Button, INPUT_PULLUP); // Pushbutton setup
   
-  Serial.begin(9600); // Start serial
-  while (!Serial) {
-    // wait for serial port to connect. Needed for native USB port only
-  }
-  Serial.println("");
-  Serial.println("Serial Initialized");
-  LCD.init(); //initialize the lcd
-  LCD.backlight(); //open the backlight 
-  LCD.clear();
-  LCD.setCursor(0,0);
-  LCD.print("LCD ON");
+  if (serialOn) startSerial();
+  if (lcdOn) startLCD();
+  printVersion();
   // connect to ethernet here
 }
 
 void loop() {
   Serial.println("In Loop");
   while(true){
+    if ( digitalRead(Button) == LOW ) { //Button is pressed?  
+      Serial.println("magic prese");
+    }
   }
+}
+
+void printVersion() {
+  LCD.setCursor(0,0);
+  LCD.print("My name is");
+  LCD.setCursor(0,1);
+  LCD.print("meetloaf (v" + version + ")");
+  delay(5000);
+}
+
+void startLCD() {
+  LCD.init(); //initialize the lcd
+  LCD.backlight(); //open the backlight 
+  LCD.clear();
+  Serial.println("LCD On");
+}
+
+void startSerial() {
+  Serial.begin(9600); // Start serial
+  while (!Serial) {
+    // wait for serial port to connect. Needed for native USB port only
+  }
+  Serial.println("");
+  Serial.println("Serial On");
 }
 
 void ethernetFetch() {
@@ -85,34 +102,8 @@ void ethernetFetch() {
     // do nothing forevermore:
   }
   while (true) {
-    if ( digitalRead(Button) == LOW ) { //Button is pressed?
-      
-    Serial.println("magic prese");
-    }
-        LCD.setCursor(16,0); // set the cursor to column 15, line 0
-        for (int positionCounter1 = 0; positionCounter1 < sizeof(txt1); positionCounter1++)
-        {
-          LCD.scrollDisplayLeft(); //Scrolls the contents of the display one space to the left.
-          LCD.print(txt1[positionCounter1]); // Print a message to the LCD.
-          delay(LCDTime); //wait for 250 microseconds
-        }
-        LCD.clear(); //Clears the LCD screen and positions the cursor in the upper-left  corner.
-        LCD.setCursor(16,1); // set the cursor to column 15, line 1
-        for (int positionCounter = 0; positionCounter < sizeof(txt2); positionCounter++)
-        {
-          LCD.scrollDisplayLeft(); //Scrolls the contents of the display one space to the left.
-          LCD.print(txt2[positionCounter]); // Print a message to the LCD.
-          delay(LCDTime); //wait for 250 microseconds
-        }
-        LCD.clear(); //Clears the LCD screen and positions the cursor in the upper-left corner.
-        LCD.setCursor(16,0); // set the cursor to column 15, line 0
-        for (int positionCounter1 = 0; positionCounter1 < sizeof(txt3); positionCounter1++)
-        {
-          LCD.scrollDisplayLeft(); //Scrolls the contents of the display one space to the left.
-          LCD.print(txt3[positionCounter1]); // Print a message to the LCD.
-          delay(LCDTime); //wait for 250 microseconds
-        }
-        LCD.clear(); //Clears the LCD screen and positions the cursor in the upper-left  corner.
+
+        
     }
 }
 
