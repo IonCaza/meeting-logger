@@ -7,9 +7,8 @@ const Team = require('../models').Team;
 const Meeting = require('../models').Meeting;
 
 router.post('/signup', function(req, res) {
-  console.log(req.body);
   if (!req.body.username || !req.body.password || !req.body.teamname) {
-    res.status(400).send({msg: 'Please pass team name, username and password.'})
+    res.status(400).send({msg: 'Please pass teamname, username and password.'})
   } else {
     Team
       .create({
@@ -27,7 +26,7 @@ router.post('/signup', function(req, res) {
 
 router.post('/signin', function(req, res) {
     Team
-      .find({
+      .findOne({
         where: {
           username: req.body.username
         }
